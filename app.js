@@ -1,3 +1,5 @@
+var count = 0;
+
 !function(lo) {
   _.each($('.movie_box'), __(
     _.c(movies),
@@ -120,6 +122,7 @@
 
         return _.go(
 
+          //펼쳐진 함수
           // data,
           // _.filter(function(movie){
           //   return movie.rating == '12세 이상 관람가';
@@ -132,16 +135,31 @@
           // }),_.hi,
           // _.first((5)),_.hi
 
+          //축약된 함수
+          // data,
+          // _.filter((movie) => movie.rating == '12세 이상 관람가'),_.hi,
+          // _.reject((movie) => movie.director == '김기덕'),_.hi,
+          // _.sort_by((a, b) => a.attendance > b.attendance ? 1 : -1),_.hi,
+          // _.first((5)),_.hi
+
+          //조은님: 비동기적용
           data,
-          _.filter((movie) => movie.rating == '12세 이상 관람가'),_.hi,
-          _.reject((movie) => movie.director == '김기덕'),_.hi,
-          _.sort_by((a, b) => a.attendance > b.attendance ? 1 : -1),_.hi,
-          _.first((5)),_.hi
-
-        )
-
-
+            L.filter(movie => {
+              count++;
+              return movie.rating == '12세 이상 관람가';
+            }),
+            L.reject(movie => {
+              count++;
+              return movie.director == '김기덕';
+            }),
+            L.take(5)
+        );
       }, _.log))
   ))
 
 }({});
+
+
+//_random
+//values
+//
